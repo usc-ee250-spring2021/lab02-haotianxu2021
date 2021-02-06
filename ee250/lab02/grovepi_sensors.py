@@ -41,9 +41,9 @@ if __name__ == '__main__':
 	th_value = grovepi.analogRead(potentiometer)
 	ultra = grovepi.ultrasonicRead(PORT)
 	if ultra < th_value:
-		setRGB(255,0,0)
+		setRGB(100,0,0)
 		setText_norefresh("{0:>4}cm OBJ PRES\n{1:>4}cm".format(th_value, ultra))
 	else:
-		setRGB(0,255,0)
+		setRGB(0,100,0)
 		setText_norefresh("{0:>4}cm         \n{1:>4}cm".format(th_value, ultra))
 
