@@ -1,7 +1,7 @@
 """ EE 250L Lab 02: GrovePi Sensors
 
 List team members here.
-
+Horace Xu
 Insert Github repository link here.
 """
 
@@ -23,16 +23,27 @@ sys.path.append('../../Software/Python/')
 sys.path.append('../../Software/Python/grove_rgb_lcd')
 
 import grovepi
-
+from grove_rgb_lcd import *
 """This if-statement checks if you are running this python file directly. That 
 is, if you run `python3 grovepi_sensors.py` in terminal, this if-statement will 
 be true"""
 if __name__ == '__main__':
     PORT = 4    # D4
+    potentiometer = 0   #A0
 
     while True:
         #So we do not poll the sensors too quickly which may introduce noise,
         #sleep for a reasonable time of 200ms between each iteration.
+	
         time.sleep(0.2)
 
         print(grovepi.ultrasonicRead(PORT))
+	th_value = grovepi.analogRead(potentiometer)
+	ultra = grovepi.ultrasonicRead(PORT)
+	if ultra < th_value:
+		setRGB(255,0,0)
+		setText_norefresh("{0}cm OBJ PRES\n{1}cm".format(th_value, ultra))
+	else:
+		setRGB(0,255,0)
+		setText_norefresh("{0}cm         \n{1}cm".format(th_value, ultra))
+
